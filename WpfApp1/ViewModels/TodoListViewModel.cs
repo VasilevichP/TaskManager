@@ -19,19 +19,29 @@ public partial class TodoListViewModel : ObservableObject
         _navigationService = navigationService;
         _dataService = dataService;
         
-        var loadedTasks = _dataService.LoadTasks();
-        Tasks = new ObservableCollection<TodoItem>(loadedTasks);
+        LoadInitialData();
+    }
+    
+    private async Task LoadInitialData()
+    {
+        var tasks = await _dataService.LoadTasksAsync();
+        Tasks.Clear();
+        foreach (var task in tasks)
+        {
+            Tasks.Add(task);
+        }
+        OnPropertyChanged(nameof(Tasks));
     }
 
     [RelayCommand]
-    private void ShowAddDialog()
+    private async Task ShowAddDialog()
     {
         var vm = App.ServiceProvider.GetRequiredService<AddTodoViewModel>();
         var view = new AddTodoView { DataContext = vm, Owner = App.Current.MainWindow };
         if (view.ShowDialog() == true && vm.ResultTask != null)
         {
             Tasks.Add(vm.ResultTask);
-            _dataService.SaveTasks(Tasks);
+            await _dataService.SaveTasksAsync(Tasks);
         }
     }
 

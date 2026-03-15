@@ -4,6 +4,6 @@ namespace WpfApp1.Services;
 
 public interface IDataService
 {
-    List<TodoItem> LoadTasks();
-    void SaveTasks(IEnumerable<TodoItem> tasks);
+    Task<List<TodoItem>> LoadTasksAsync();
+    Task SaveTasksAsync(IEnumerable<TodoItem> tasks);
 }

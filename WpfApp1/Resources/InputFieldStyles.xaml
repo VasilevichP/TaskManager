@@ -3,10 +3,8 @@
     
     <SolidColorBrush x:Key="ComboBorderNormal"    Color="#D1D5DB"/>     
     <SolidColorBrush x:Key="ComboBorderHover"     Color="#9CA3AF"/>     
-    <SolidColorBrush x:Key="ComboBorderFocused"   Color="#3B82F6"/>     
     <SolidColorBrush x:Key="ComboBackgroundHover" Color="#F9FAFB"/>     
-    <SolidColorBrush x:Key="ComboArrowColor"      Color="#6B7280"/>    
-    <SolidColorBrush x:Key="ComboArrowFocused"    Color="#2563EB"/>
+    <SolidColorBrush x:Key="ComboArrowColor"      Color="#6B7280"/> 
     
     <Style x:Key="TextBoxModern" TargetType="TextBox">
         <Setter Property="Background" Value="#FFFFFF" />
@@ -183,7 +181,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4"
+                                CornerRadius="6"
                                 SnapsToDevicePixels="True">
 
                             <Grid>
@@ -230,20 +228,13 @@
 
                         <Border x:Name="FocusBorder"
                                 BorderThickness="1.5"
-                                CornerRadius="4"
+                                CornerRadius="6"
                                 BorderBrush="Transparent"
                                 IsHitTestVisible="False"/>
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        
-                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource ComboBorderFocused}"/>
-                            <Setter TargetName="Border" Property="BorderThickness" Value="1.5"/>
-                            <Setter TargetName="FocusBorder" Property="BorderBrush" Value="#60A5FA"/>
-                            <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource ComboArrowFocused}"/>
-                        </Trigger>
-
+            
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="Opacity" Value="0.58"/>
                             <Setter TargetName="Border" Property="Background" Value="#F3F4F6"/>

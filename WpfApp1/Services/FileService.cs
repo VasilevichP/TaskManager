@@ -8,7 +8,7 @@ public class FileService:IDataService
 {
     private const string FilePath = "tasks.json";
     
-    public List<TodoItem> LoadTasks()
+    public async Task<List<TodoItem>> LoadTasksAsync()
     {
         if (!File.Exists(FilePath))
         {
@@ -17,8 +17,9 @@ public class FileService:IDataService
 
         try
         {
-            string json = File.ReadAllText(FilePath);
-            return JsonSerializer.Deserialize<List<TodoItem>>(json) ?? new List<TodoItem>();
+            using FileStream openStream = File.OpenRead(FilePath);
+            return await JsonSerializer.DeserializeAsync<List<TodoItem>>(openStream) 
+                   ?? new List<TodoItem>();
         }
         catch (JsonException)
         {
@@ -26,11 +27,10 @@ public class FileService:IDataService
         }
     }
 
-    public void SaveTasks(IEnumerable<TodoItem> tasks)
+    public async Task SaveTasksAsync(IEnumerable<TodoItem> tasks)
     {
-        var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(tasks, options);
-        File.WriteAllText(FilePath, json);
+        using FileStream createStream = File.Create(FilePath);
+        await JsonSerializer.SerializeAsync(createStream, tasks);
     }
     
 }

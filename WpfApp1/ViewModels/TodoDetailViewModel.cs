@@ -33,7 +33,7 @@ public partial class TodoDetailViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void SaveChanges()
+    private async Task SaveChanges()
     {
         if (_originalTask != null)
         {
@@ -41,7 +41,7 @@ public partial class TodoDetailViewModel : ObservableObject
             _originalTask.DueDate = this.DueDate;
             _originalTask.Status = this.Status;
             
-             _dataService.SaveTasks(_todoListVM.Tasks);
+             await _dataService.SaveTasksAsync(_todoListVM.Tasks);
         }
         _navigationService.NavigateTo("TodoList");
     }
