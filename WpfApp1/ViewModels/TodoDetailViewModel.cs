@@ -2,7 +2,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WpfApp1.Models;
 using WpfApp1.Services;
-using TaskStatus = WpfApp1.Models.TaskStatus;
 
 namespace WpfApp1.ViewModels;
 
@@ -16,7 +15,7 @@ public partial class TodoDetailViewModel : ObservableObject
 
     [ObservableProperty] private string _title = string.Empty;
     [ObservableProperty] private DateTime? _dueDate;
-    [ObservableProperty] private TaskStatus _status;
+    [ObservableProperty] private TodoStatus _status;
 
     public TodoDetailViewModel(INavigationService navigationService, IDataService dataService, TodoListViewModel todoListVm)
     {
@@ -42,7 +41,7 @@ public partial class TodoDetailViewModel : ObservableObject
             _originalTask.DueDate = this.DueDate;
             _originalTask.Status = this.Status;
             
-            _dataService.SaveTasks(_todoListVM.Tasks);
+             _dataService.SaveTasks(_todoListVM.Tasks);
         }
         _navigationService.NavigateTo("TodoList");
     }

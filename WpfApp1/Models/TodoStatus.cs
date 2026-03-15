@@ -1,6 +1,6 @@
 namespace WpfApp1.Models;
 
-public enum TaskStatus
+public enum TodoStatus
 {
     New,
     InProgress,

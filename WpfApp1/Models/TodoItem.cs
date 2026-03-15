@@ -8,5 +8,5 @@ public partial class TodoItem : ObservableObject
 
     [ObservableProperty] private DateTime? dueDate;
 
-    [ObservableProperty] private TaskStatus status;
+    [ObservableProperty] private TodoStatus status;
 }

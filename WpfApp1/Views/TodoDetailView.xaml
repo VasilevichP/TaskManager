@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="TaskStatusEnum">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="models:TaskStatus"/>
+                <x:Type TypeName="models:TodoStatus"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
@@ -30,19 +30,20 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Название:" FontSize="14" VerticalAlignment="Center" Margin="0,0,10,0"/>
-        <TextBox Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
+        <TextBox Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBoxModern}"/>
 
         <TextBlock Grid.Row="1" Text="Сделать до:" Margin="0,15,10,0" FontSize="14" VerticalAlignment="Center"/>
         <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,15,0,0" SelectedDate="{Binding DueDate}" FontSize="14"/>
         
         <TextBlock Grid.Row="2" Text="Статус:" Margin="0,15,10,0" FontSize="14" VerticalAlignment="Center"/>
         <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,15,0,0" FontSize="14"
+                  Style="{StaticResource ModernComboBox}"
                   ItemsSource="{Binding Source={StaticResource TaskStatusEnum}}"
                   SelectedItem="{Binding Status}"/>
 
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Сохранить изменения" Padding="15,8" Command="{Binding SaveChangesCommand}"/>
-            <Button Content="Отмена" Padding="15,8" Margin="10,0,0,0" Command="{Binding CancelCommand}"/>
+            <Button Content="Сохранить" Command="{Binding SaveChangesCommand}" Style="{StaticResource ButtonPrimary}"/>
+            <Button Content="Отмена" Margin="10,0,0,0" Command="{Binding CancelCommand}" Style="{StaticResource ButtonCancel}"/>
         </StackPanel>
     </Grid>
 </UserControl>

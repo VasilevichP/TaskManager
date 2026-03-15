@@ -1,8 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.VisualBasic;
 using WpfApp1.Models;
-using TaskStatus = System.Threading.Tasks.TaskStatus;
 
 namespace WpfApp1.ViewModels;
 
@@ -25,7 +23,7 @@ public partial class AddTodoViewModel : ObservableObject
         {
             Title = this.Title,
             DueDate = this.DueDate,
-            Status = Models.TaskStatus.New
+            Status = Models.TodoStatus.New
         };
     }
 
